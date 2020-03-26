@@ -28,6 +28,24 @@ server.post('/dogs', (req, res) => {
     });
 });
 
+server.put('/dogs/:id', (req, res) => {
+  Dogs.update(req.params.id, req.body)
+    .then(count => {
+      if (count > 0) {
+        Dogs.findById(req.params.id)
+          .then(dog => {
+            res.status(200).json(dog);
+          })
+          .catch(error => {
+            res.status(500).json({ message: "The dog information could not be retrieved", error });
+          });
+      };
+    })
+    .catch(error => {
+      res.status(500).json({ message: "The dog could not be updated", error });
+    });
+});
+
 server.delete('/dogs/:id', (req, res) => {
   Dogs.remove(req.params.id)
     .then(count => {
@@ -39,7 +57,7 @@ server.delete('/dogs/:id', (req, res) => {
           .catch(error => {
             res.status(500).json({ message: "The dog information could not be retrieved", error });
           });
-      }
+      };
     })
     .catch(error => {
       res.status(500).json({ message: "The dog could not be deleted", error });
