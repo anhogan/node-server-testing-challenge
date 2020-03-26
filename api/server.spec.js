@@ -1,0 +1,13 @@
+const request = require('supertest');
+
+const server = require('./server');
+
+const db = require('../data/dbConfig');
+
+beforeEach(async () => {
+  await db.seed.run();
+});
+
+describe('', () => {
+
+});
