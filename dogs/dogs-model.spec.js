@@ -17,7 +17,7 @@ describe('Find all Dogs', () => {
 });
 
 describe('Find dog by ID', () => {
-  it('Returns one dog based if ID is valid', async () => {
+  it('Returns one dog if ID is valid', async () => {
     const res = await Dogs.findById(1);
 
     expect(res.name).toBe('Socks');
@@ -37,6 +37,8 @@ describe('Add a dog', () => {
     expect(res.name).toBe('Striker');
     expect(res.id).toBe(4);
   });
+
+  // FIX THIS TEST
 
   // it('Will return null if no name is entered', async () => {
   //   const res = await Dogs.add();
