@@ -6,29 +6,72 @@ beforeEach(async () => {
 });
 
 describe('Find all Dogs', () => {
-  it.todo('Returns a list of all dogs');
+  it('Returns a list of all dogs', async () => {
+    const res = await Dogs.find();
+
+    expect(res).toHaveLength(3);
+    expect(res[0].name).toBe('Socks');
+    expect(res[1].name).toBe('Jade');
+    expect(res[2].name).toBe('Sparta');
+  });
 });
 
 describe('Find dog by ID', () => {
-  it.todo('Returns one dog based if ID is valid');
+  it('Returns one dog based if ID is valid', async () => {
+    const res = await Dogs.findById(1);
 
-  it.todo('Will return null if ID is invalid');
+    expect(res.name).toBe('Socks');
+  });
+
+  it('Will return undefined if ID is invalid', async () => {
+    const res = await Dogs.findById(5);
+
+    expect(res).toBeUndefined();
+  });
 });
 
 describe('Add a dog', () => {
-  it.todo('Adds a dog to the database');
+  it('Adds a dog to the database', async () => {
+    const res = await Dogs.add({ name: "Striker" });
 
-  it.todo('Will return null if no name is entered');
+    expect(res.name).toBe('Striker');
+    expect(res.id).toBe(4);
+  });
+
+  // it('Will return null if no name is entered', async () => {
+  //   const res = await Dogs.add();
+  //   console.log(res);
+
+  //   expect(res).toThrow();
+  // });
 });
 
 describe('Update a dog', () => {
-  it.todo('Updates a dog in the database');
+  it('Updates a dog in the database', async () => {
+    const res = await Dogs.update(2, { name: "Jaden" });
 
-  it.todo('Will return null if the ID is invalid');
+    expect(res.name).toBe('Jaden');
+  });
+
+  it('Will return undefined if the ID is invalid', async () => {
+    const res = await Dogs.update(4, { name: "Barkley" });
+
+    expect(res).toBeUndefined();
+  });
 });
 
 describe('Delete a dog', () => {
-  it.todo('Deletes a dog from the database');
+  it('Deletes a dog from the database', async () => {
+    await Dogs.remove(1);
 
-  it.todo('Will return 0 if the ID is invalid');
+    const res = await db('dogs').select();
+
+    expect(res).toHaveLength(2);
+  });
+
+  it('Will return 0 if the ID is invalid', async () => {
+    const res = await Dogs.remove(4);
+
+    expect(res).toBe(0);
+  });
 });
