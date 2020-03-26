@@ -38,14 +38,11 @@ describe('Add a dog', () => {
     expect(res.id).toBe(4);
   });
 
-  // FIX THIS TEST
+  it('Will return null if no name is entered', async () => {
+    const res = await Dogs.add();
 
-  // it('Will return null if no name is entered', async () => {
-  //   const res = await Dogs.add();
-  //   console.log(res);
-
-  //   expect(res).toThrow();
-  // });
+    expect(res).toBe('Error, you must add dog information');
+  });
 });
 
 describe('Update a dog', () => {

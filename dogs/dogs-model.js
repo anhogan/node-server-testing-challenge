@@ -17,10 +17,14 @@ function findById(id) {
 };
 
 function add(dog) {
-  return db('dogs').insert(dog)
+  if (dog) {
+    return db('dogs').insert(dog)
     .then(ids => {
       return findById(ids[0]);
     });
+  } else {
+    return 'Error, you must add dog information'
+  };
 };
 
 function update(id, changes) {

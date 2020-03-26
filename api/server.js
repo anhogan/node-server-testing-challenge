@@ -66,8 +66,7 @@ function validateID(req, res, next) {
       };
     })
     .catch(error => {
-      console.log(error);
-      res.status(500).json({ message: "The dog information could not be retrieved" });
+      res.status(500).json({ message: "The dog information could not be retrieved", error });
     });
 };
 
