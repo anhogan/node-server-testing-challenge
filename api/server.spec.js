@@ -40,13 +40,11 @@ describe('POST Endpoint', () => {
 });
 
 describe('PUT Endpoint', () => {
-  // Async timeout issue
-
-  it.only('Updates a dog in the database', async () => {
-    const res = await request(server).put('/dogs/2').send({ name: "Jaden" });
+  it('Updates a dog in the database', async () => {
+    const res = await request(server).put('/dogs/2').send({ name: "Striker" });
 
     expect(res.statusCode).toBe(200);
-    expect(res.body.name).toBe('Jaden');
+    expect(res.body.name).toBe('Striker');
     expect(res.type).toBe('application/json');
   });
 
